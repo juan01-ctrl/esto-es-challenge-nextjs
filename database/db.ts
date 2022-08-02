@@ -22,7 +22,7 @@ export const connect = async () => {
     await mongoose.disconnect();
   }
 
-  await mongoose.connect(process.env.MONGO_URL || "https://esto-es-challenge-nextjs.vercel.app");
+  await mongoose.connect(process.env.MONGO_URL || "mongodb://esto-es-challenge-nextjs.vercel.app:27017/projectsdb");
   mongoConnection.isConnected = 1;
 };
 
