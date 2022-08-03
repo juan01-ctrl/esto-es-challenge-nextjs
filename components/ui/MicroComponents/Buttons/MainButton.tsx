@@ -6,14 +6,14 @@ interface Props {
   align?: string;
   bgColor?: string;
   color?: string;
-  handleClick?:()=>void
+  handleClick?: () => void;
 }
 
 export const MainButton: FC<Props> = ({
   children,
   type = "button",
   bgColor,
-  handleClick
+  handleClick,
 }) => {
   const ButtonStyles = {
     background: `${bgColor === "invert" ? "#fff" : "#f5222d"}`,
