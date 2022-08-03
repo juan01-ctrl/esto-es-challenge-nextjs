@@ -8,7 +8,7 @@ import { MainButton } from "../MicroComponents/Buttons/MainButton";
 import { ProjectsContext } from "../../../context/projects/ProjectsContext";
 import { ProjectFormTypes } from "../../../interfaces/ProjectForm";
 import { Project } from "../../../interfaces/Project";
-import { Loader } from '../MicroComponents/Loader/Loader';
+import { Loader } from "../MicroComponents/Loader/Loader";
 
 interface Props {
   project?: Project;
@@ -17,21 +17,16 @@ interface Props {
 export const ProjectForm: FC<Props> = ({ project }) => {
   const router = useRouter();
 
-
-  const { addNewProject, updateProject,isLoading } = useContext(ProjectsContext);
+  const { addNewProject, updateProject, isLoading } =
+    useContext(ProjectsContext);
 
   const handleSubmit = (values: ProjectFormTypes) => {
-   
     if (project) {
-       updateProject({ ...project, ...values });
-   
-        router.push("/");
-     
+      updateProject({ ...project, ...values }, router);
+
       return;
     }
-    addNewProject(values);
-
-      router.push("/");
+    addNewProject(values, router);
   };
   return (
     <Formik
@@ -56,8 +51,7 @@ export const ProjectForm: FC<Props> = ({ project }) => {
               flexGrow: "1",
             }}
           >
-            
-            {isLoading &&<Loader/>}
+            {isLoading && <Loader />}
             <Form>
               <TextField label="Project name" name="projectName" type="text" />
               <TextField label="Description" name="description" type="text" />
@@ -98,7 +92,6 @@ export const ProjectForm: FC<Props> = ({ project }) => {
                 </MainButton>
               </div>
             </Form>
-          
           </div>
         );
       }}

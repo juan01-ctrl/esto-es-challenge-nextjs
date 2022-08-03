@@ -1,3 +1,4 @@
+import { NextRouter } from "next/router";
 import React, { FC, ReactElement, useEffect, useReducer } from "react";
 import toast from "react-hot-toast";
 import { ProjectsContext, projectsReducer } from ".";
@@ -20,25 +21,28 @@ export const ProjectsProvider: FC<{ children: ReactElement }> = ({
 }) => {
   const [state, dispatch] = useReducer(projectsReducer, Project_INITIAL_STATE);
 
-  const addNewProject = async (project: ProjectFormTypes) => {
+  const addNewProject = async (project: ProjectFormTypes,router:NextRouter) => {
     dispatch({ type: "IS_LOADING", payload: true });
     const { data } = await projectsApi.post<Project>("/projects", project);
     dispatch({ type: "IS_LOADING", payload: false });
     dispatch({ type: "ADD_PROJECT", payload: data });
+    router.push("/");
     toast.success("Project created successfully!");
 
   };
 
-  const updateProject = async (project: Project) => {
+  const updateProject = async (project: Project,router:NextRouter) => {
+ 
+
     try {
       dispatch({ type: "IS_LOADING", payload: true });
       const { data } = await projectsApi.put<Project>(
         `/projects/${project._id}`,
         project
       );
-
       dispatch({ type: "IS_LOADING", payload: false });
       dispatch({ type: "UPDATE_PROJECT", payload: data });
+      router.push("/");
       toast.success("Project updated successfully!");
 
     } catch (error) {
