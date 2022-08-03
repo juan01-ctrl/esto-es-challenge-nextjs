@@ -20,7 +20,6 @@ import { Project } from "../../../interfaces/Project";
 import { useRouter } from "next/router";
 import { ProjectsContext } from "../../../context/projects";
 import { MainButton } from "../MicroComponents/Buttons/MainButton";
-import toast, { Toaster } from "react-hot-toast";
 
 interface Props {
   project: Project;
@@ -121,7 +120,6 @@ export const ProjectListItem: FC<Props> = ({
                   handleClick={() => {
                     deleteProject(project._id!);
                     setConfirmDelete(false);
-                    toast.success("project removed successfully!");
                   }}
                 >
                   Confirm

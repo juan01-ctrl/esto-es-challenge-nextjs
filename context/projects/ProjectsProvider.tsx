@@ -1,4 +1,5 @@
 import React, { FC, ReactElement, useEffect, useReducer } from "react";
+import toast from "react-hot-toast";
 import { ProjectsContext, projectsReducer } from ".";
 import projectsApi from "../../apis/projectsApi";
 import { Project } from "../../interfaces/Project";
@@ -23,6 +24,8 @@ export const ProjectsProvider: FC<{ children: ReactElement }> = ({
     dispatch({ type: "IS_LOADING", payload: true });
     const { data } = await projectsApi.post<Project>("/projects", project);
     dispatch({ type: "ADD_PROJECT", payload: data });
+    toast.success("Project created successfully!");
+
     dispatch({ type: "IS_LOADING", payload: false });
   };
 
@@ -33,20 +36,26 @@ export const ProjectsProvider: FC<{ children: ReactElement }> = ({
         `/projects/${project._id}`,
         project
       );
+
       dispatch({ type: "UPDATE_PROJECT", payload: data });
+      dispatch({ type: "IS_LOADING", payload: false });
+      toast.success("Project updated successfully!");
+
     } catch (error) {
       console.log(error);
-    } finally {
       dispatch({ type: "IS_LOADING", payload: false });
-    }
+
+    } 
   };
   const deleteProject = async (id: string) => {
     try {
       dispatch({ type: "IS_LOADING", payload: true });
 
       const res = await projectsApi.delete<Project>(`/projects/${id}`);
-      dispatch({ type: "IS_LOADING", payload: false });
       dispatch({ type: "DELETE_PROJECT", payload: id });
+      dispatch({ type: "IS_LOADING", payload: false });
+      toast.success("project removed successfully!");
+
     } catch (error) {
       console.log(error);
       dispatch({ type: "IS_LOADING", payload: false });

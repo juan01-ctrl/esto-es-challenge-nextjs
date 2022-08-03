@@ -8,8 +8,6 @@ import { MainButton } from "../MicroComponents/Buttons/MainButton";
 import { ProjectsContext } from "../../../context/projects/ProjectsContext";
 import { ProjectFormTypes } from "../../../interfaces/ProjectForm";
 import { Project } from "../../../interfaces/Project";
-import toast, { Toaster } from "react-hot-toast";
-import {useState} from 'react';
 import { Loader } from '../MicroComponents/Loader/Loader';
 
 interface Props {
@@ -26,7 +24,6 @@ export const ProjectForm: FC<Props> = ({ project }) => {
    
     if (project) {
        updateProject({ ...project, ...values });
-       toast.success("Project updated successfully!");
    
         router.push("/");
      
@@ -34,7 +31,6 @@ export const ProjectForm: FC<Props> = ({ project }) => {
     }
     addNewProject(values);
 
-    toast.success("Project created successfully!");
       router.push("/");
   };
   return (
@@ -102,7 +98,7 @@ export const ProjectForm: FC<Props> = ({ project }) => {
                 </MainButton>
               </div>
             </Form>
-            <Toaster />
+          
           </div>
         );
       }}
