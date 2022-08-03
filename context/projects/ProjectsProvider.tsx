@@ -23,10 +23,10 @@ export const ProjectsProvider: FC<{ children: ReactElement }> = ({
   const addNewProject = async (project: ProjectFormTypes) => {
     dispatch({ type: "IS_LOADING", payload: true });
     const { data } = await projectsApi.post<Project>("/projects", project);
+    dispatch({ type: "IS_LOADING", payload: false });
     dispatch({ type: "ADD_PROJECT", payload: data });
     toast.success("Project created successfully!");
 
-    dispatch({ type: "IS_LOADING", payload: false });
   };
 
   const updateProject = async (project: Project) => {
@@ -37,8 +37,8 @@ export const ProjectsProvider: FC<{ children: ReactElement }> = ({
         project
       );
 
-      dispatch({ type: "UPDATE_PROJECT", payload: data });
       dispatch({ type: "IS_LOADING", payload: false });
+      dispatch({ type: "UPDATE_PROJECT", payload: data });
       toast.success("Project updated successfully!");
 
     } catch (error) {
@@ -52,8 +52,8 @@ export const ProjectsProvider: FC<{ children: ReactElement }> = ({
       dispatch({ type: "IS_LOADING", payload: true });
 
       const res = await projectsApi.delete<Project>(`/projects/${id}`);
-      dispatch({ type: "DELETE_PROJECT", payload: id });
       dispatch({ type: "IS_LOADING", payload: false });
+      dispatch({ type: "DELETE_PROJECT", payload: id });
       toast.success("project removed successfully!");
 
     } catch (error) {
@@ -66,8 +66,8 @@ export const ProjectsProvider: FC<{ children: ReactElement }> = ({
     dispatch({ type: "IS_LOADING", payload: true });
 
     const { data } = await projectsApi.get<Project[]>("/projects");
-    dispatch({ type: "REFRESH_DATA", payload: data });
     dispatch({ type: "IS_LOADING", payload: false });
+    dispatch({ type: "REFRESH_DATA", payload: data });
 
   };
 
