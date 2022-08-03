@@ -10,12 +10,14 @@ interface Props {
   status?: ProjectStatus;
   searchQry?: string;
   isDesktop?: boolean;
+ 
 }
 
 export const ProjectListContainer: FC<Props> = ({
   status,
   searchQry,
   isDesktop,
+
 }) => {
   const { projectList, isLoading } = useContext(ProjectsContext);
 
@@ -49,6 +51,7 @@ export const ProjectListContainer: FC<Props> = ({
               project={project}
               lastItem={idx === projectsByStatus.length - 1}
               isDesktop={isDesktop}
+            
             />
           ))}
         </ProjectList>

@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import Link from "next/link";
 import { ChangeEvent, useContext, useEffect, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import { Layout } from "../components/layouts/Layout";
 import { ProjectListContainer } from "../components/ui";
 import {
@@ -65,16 +66,21 @@ const Home: NextPage = () => {
             status="Pending"
             searchQry={searchQry}
             isDesktop={isDesktop}
+           
+              
           />
           <ProjectListContainer
             status="In Progress"
             searchQry={searchQry}
             isDesktop={isDesktop}
+           
+
           />
           <ProjectListContainer
             status="Finished"
             searchQry={searchQry}
             isDesktop={isDesktop}
+
           />
         </>
       ) : (
@@ -94,7 +100,9 @@ const Home: NextPage = () => {
             </a>
           </Link>
         </div>
+
       )}
+      <Toaster />
     </Layout>
   );
 };

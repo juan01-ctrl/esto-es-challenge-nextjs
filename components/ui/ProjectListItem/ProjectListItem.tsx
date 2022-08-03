@@ -131,7 +131,6 @@ export const ProjectListItem: FC<Props> = ({
           </ConfirmDelete>
         )}
       </ProjectItem>
-      <Toaster />
     </>
   );
 };
