@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import Link from "next/link";
 import { ChangeEvent, useContext, useEffect, useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import  { Toaster } from "react-hot-toast";
 import { Layout } from "../components/layouts/Layout";
 import { ProjectListContainer } from "../components/ui";
 import {
