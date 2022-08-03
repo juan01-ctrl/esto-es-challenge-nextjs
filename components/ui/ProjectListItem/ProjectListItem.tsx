@@ -56,7 +56,9 @@ export const ProjectListItem: FC<Props> = ({
           </div>
         )}
 
-        <div style={{ display: "flex" }}>
+        <div
+          style={{ display: "flex", marginTop: `${!isDesktop ? ".6em" : "0"}` }}
+        >
           <ImgProject>{project.assignedTo![0]}</ImgProject>
           <ProjectInfo isMobile={!isDesktop}>{project.assignedTo}</ProjectInfo>
         </div>
@@ -114,18 +116,16 @@ export const ProjectListItem: FC<Props> = ({
                 >
                   Cancel
                 </MainButton>
-                
-              
-                  <MainButton
-                    handleClick={() => {
-                      deleteProject(project._id!);
-                      setConfirmDelete(false);
-                     toast.success("project removed successfully!");
-                    }}
-                  >
-                    Confirm
-                  </MainButton>
-                
+
+                <MainButton
+                  handleClick={() => {
+                    deleteProject(project._id!);
+                    setConfirmDelete(false);
+                    toast.success("project removed successfully!");
+                  }}
+                >
+                  Confirm
+                </MainButton>
               </div>
             </ModalDelete>
           </ConfirmDelete>

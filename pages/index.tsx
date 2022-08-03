@@ -8,7 +8,7 @@ const Home: NextPage = () => {
   const [searchQry, setSearchQry] = useState("");
 
   const [width, setWidth] = useState<number>();
-
+ 
 
   function handleWindowSizeChange() {
     setWidth(window.innerWidth);
@@ -59,16 +59,19 @@ const Home: NextPage = () => {
         status="Pending"
         searchQry={searchQry}
         isDesktop={isDesktop}
+        
       />
       <ProjectListContainer
         status="In Progress"
         searchQry={searchQry}
         isDesktop={isDesktop}
+
       />
       <ProjectListContainer
         status="Finished"
         searchQry={searchQry}
         isDesktop={isDesktop}
+
       />
     </Layout>
   );

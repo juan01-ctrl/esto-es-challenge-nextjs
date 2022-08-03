@@ -7,6 +7,7 @@ interface ContextProps {
   addNewProject: (project: ProjectFormTypes) => void;
   updateProject: (project:Project) => void;
   deleteProject: (id:string) => void;
+  isLoading:boolean
 }
 
 export const ProjectsContext = createContext({} as ContextProps);

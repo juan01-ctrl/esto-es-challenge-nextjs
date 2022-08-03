@@ -41,7 +41,7 @@ font-weight:400;
 color:#595959;
 margin:0;
 width:${({isMobile})=>isMobile ? "auto" : "140px"};
-margin-top:${({isMobile})=>isMobile ? ".6em" : "0"};
+margin-top: 0;
 border:${({status})=> status ? '1px solid #d9d9d9' : 'none'};
 border-radius:${({status})=> status ? '6px' : 'none'};
 background:${({status})=> status ? '#f5f5f5' : 'none'};

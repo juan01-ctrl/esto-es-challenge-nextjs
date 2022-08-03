@@ -9,6 +9,8 @@ import { ProjectsContext } from "../../../context/projects/ProjectsContext";
 import { ProjectFormTypes } from "../../../interfaces/ProjectForm";
 import { Project } from "../../../interfaces/Project";
 import toast, { Toaster } from "react-hot-toast";
+import {useState} from 'react';
+import { Loader } from '../MicroComponents/Loader/Loader';
 
 interface Props {
   project?: Project;
@@ -17,16 +19,17 @@ interface Props {
 export const ProjectForm: FC<Props> = ({ project }) => {
   const router = useRouter();
 
-  const { addNewProject, updateProject } = useContext(ProjectsContext);
+
+  const { addNewProject, updateProject,isLoading } = useContext(ProjectsContext);
 
   const handleSubmit = (values: ProjectFormTypes) => {
+   
     if (project) {
-      updateProject({ ...project, ...values });
+       updateProject({ ...project, ...values });
       router.push("/");
       toast.success("Project updated successfully!");
       return;
     }
-
     addNewProject(values);
 
     router.push("/");
@@ -55,6 +58,8 @@ export const ProjectForm: FC<Props> = ({ project }) => {
               flexGrow: "1",
             }}
           >
+            
+            {isLoading &&<Loader/>}
             <Form>
               <TextField label="Project name" name="projectName" type="text" />
               <TextField label="Description" name="description" type="text" />

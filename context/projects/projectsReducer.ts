@@ -5,7 +5,8 @@ type ProjectActionType =
   | { type: "ADD_PROJECT"; payload: Project }
   | { type: "UPDATE_PROJECT"; payload: Project }
   | { type: "DELETE_PROJECT"; payload: string }
-  | { type: "REFRESH_DATA"; payload: Project[] };
+  | { type: "REFRESH_DATA"; payload: Project[] }
+  | { type: "IS_LOADING"; payload: boolean };
 
 export const projectsReducer = (
   state: ProjectState,
@@ -16,6 +17,11 @@ export const projectsReducer = (
       return {
         ...state,
         projectList: [...state.projectList, action.payload],
+      };
+    case "IS_LOADING":
+      return {
+        ...state,
+        isLoading:action.payload
       };
     case "UPDATE_PROJECT":
       return {
@@ -32,12 +38,12 @@ export const projectsReducer = (
         }),
       };
     case "DELETE_PROJECT":
-      console.log(action.payload,state.projectList)
+      console.log(action.payload, state.projectList);
       return {
         ...state,
         projectList: state.projectList.filter(
           (project) => project._id !== action.payload
-        )
+        ),
       };
 
     case "REFRESH_DATA":

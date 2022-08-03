@@ -4,6 +4,7 @@ import { ProjectListItem } from "../ProjectListItem/ProjectListItem";
 import { ProjectsContext } from "../../../context/projects";
 import { ProjectStatus } from "../../../interfaces/Project";
 import { formatAMPM, formatDate } from "../../../utils/formatDate";
+import { Loader } from '../MicroComponents/Loader/Loader';
 
 interface Props {
   status?: ProjectStatus;
@@ -12,9 +13,7 @@ interface Props {
 }
 
 export const ProjectListContainer: FC<Props> = ({ status, searchQry,isDesktop }) => {
-  const { projectList } = useContext(ProjectsContext);
-
- 
+  const { projectList,isLoading } = useContext(ProjectsContext);
 
   const projectsByStatus = useMemo(
     () => projectList.filter((project) => project.status === status),
@@ -37,7 +36,8 @@ export const ProjectListContainer: FC<Props> = ({ status, searchQry,isDesktop })
     <>
     {!isDesktop && <StatusHeader>{status}</StatusHeader>
     } 
-
+  {isLoading ?  <Loader/>:
+  
       <ProjectList>
         {filterProjects()?.map((project, idx) => (
           <ProjectListItem
@@ -48,6 +48,7 @@ export const ProjectListContainer: FC<Props> = ({ status, searchQry,isDesktop })
           />
         ))}
       </ProjectList>
+  }
     
     </>
   );
