@@ -26,14 +26,18 @@ export const ProjectForm: FC<Props> = ({ project }) => {
    
     if (project) {
        updateProject({ ...project, ...values });
-      router.push("/");
-      toast.success("Project updated successfully!");
+       toast.success("Project updated successfully!");
+       setTimeout(()=>{
+        router.push("/");
+      },500)
       return;
     }
     addNewProject(values);
 
-    router.push("/");
     toast.success("Project created successfully!");
+    setTimeout(()=>{
+      router.push("/");
+    },500)
   };
   return (
     <Formik
