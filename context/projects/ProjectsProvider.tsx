@@ -21,7 +21,6 @@ export const ProjectsProvider: FC<{ children: ReactElement }> = ({
 
   const addNewProject = async (project: ProjectFormTypes) => {
     dispatch({ type: "IS_LOADING", payload: true });
-
     const { data } = await projectsApi.post<Project>("/projects", project);
     dispatch({ type: "ADD_PROJECT", payload: data });
     dispatch({ type: "IS_LOADING", payload: false });
@@ -46,12 +45,12 @@ export const ProjectsProvider: FC<{ children: ReactElement }> = ({
       dispatch({ type: "IS_LOADING", payload: true });
 
       const res = await projectsApi.delete<Project>(`/projects/${id}`);
+      dispatch({ type: "IS_LOADING", payload: false });
       dispatch({ type: "DELETE_PROJECT", payload: id });
     } catch (error) {
       console.log(error);
-    } finally {
       dispatch({ type: "IS_LOADING", payload: false });
-    }
+    } 
   };
 
   const refreshProjects = async () => {
